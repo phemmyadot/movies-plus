@@ -2,26 +2,25 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:moviesplus/models/movie_model.dart';
-import 'package:moviesplus/services/movies_service.dart';
+import 'package:moviesplus/models/tv_show_model.dart';
+import 'package:moviesplus/services/tv_shows_service.dart';
 import 'package:moviesplus/utils/essentials.dart';
 import 'package:moviesplus/widgets/custom_drawer.dart';
 import 'package:moviesplus/widgets/custom_input.dart';
 
-class MoviesSearchScreen extends StatefulWidget {
-  static const routeName = '/tasks';
+class TvShowsSearchScreen extends StatefulWidget {
 
   final config;
-  MoviesSearchScreen(this.config);
+  TvShowsSearchScreen(this.config);
   @override
-  _MoviesSearchScreenState createState() => _MoviesSearchScreenState();
+  _TvShowsSearchScreenState createState() => _TvShowsSearchScreenState();
 }
 
-class _MoviesSearchScreenState extends State<MoviesSearchScreen> {
+class _TvShowsSearchScreenState extends State<TvShowsSearchScreen> {
   ScrollController scrollController;
   TextEditingController _controller = TextEditingController();
   StreamController _searchResultsController;
-  Future<MovieResponse> searchedMovies;
+  Future<TvShowResponse> searchedMovies;
 
   void initState() {
     _searchResultsController = new StreamController.broadcast();
@@ -182,7 +181,7 @@ class _MoviesSearchScreenState extends State<MoviesSearchScreen> {
                                     {
                                       setState(() => disableSpinner = false),
                                       _searchResultsController.sink.add(1),
-                                      searchMovies(query).then((value) =>
+                                      searchTvShows(query).then((value) =>
                                           _searchResultsController.sink
                                               .add(value))
                                     }

@@ -3,7 +3,7 @@ import 'package:moviesplus/utils/app_icons.dart';
 import 'package:moviesplus/utils/essentials.dart';
 
 class AppMenu extends StatelessWidget {
-  var title;
+  final title;
 
 
   AppMenu(this.title);

@@ -1,33 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:moviesplus/models/movie_model.dart';
-import 'package:moviesplus/screens/movies/widgets/category.dart';
-import 'package:moviesplus/services/movies_service.dart';
+import 'package:moviesplus/models/tv_show_model.dart';
+import 'package:moviesplus/screens/tv_shows/widgets/category.dart';
+import 'package:moviesplus/services/tv_shows_service.dart';
 import 'package:moviesplus/utils/app_icons.dart';
 import 'package:moviesplus/utils/essentials.dart';
 import 'package:moviesplus/widgets/custom_drawer.dart';
 
-class MoviesScreen extends StatefulWidget {
-  static const routeName = '/movies';
+class TvShowsScreen extends StatefulWidget {
 
   final config;
 
-  MoviesScreen(this.config);
+  TvShowsScreen(this.config);
   @override
-  _MoviesScreenState createState() => _MoviesScreenState();
+  _TvShowsScreenState createState() => _TvShowsScreenState();
 }
 
-class _MoviesScreenState extends State<MoviesScreen> {
+class _TvShowsScreenState extends State<TvShowsScreen> {
   ScrollController scrollController;
-  Future<MovieResponse> popularMovies;
-  Future<MovieResponse> topRatedMovies;
-  Future<MovieResponse> upcomingMovies;
+  Future<TvShowResponse> popularTvShows;
+  Future<TvShowResponse> topRatedTvShows;
+  Future<TvShowResponse> upcomingTvShows;
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   void initState() {
-    popularMovies = fetchPopularMovies();
-    topRatedMovies = fetchTopRatedMovies();
-    upcomingMovies = fetchUpcomingMovies();
+    popularTvShows = fetchPopularTvShows();
+    topRatedTvShows = fetchTopRatedTvShows();
+    upcomingTvShows = fetchUpcomingTvShows();
     super.initState();
   }
 
@@ -49,7 +48,7 @@ class _MoviesScreenState extends State<MoviesScreen> {
             pinned: true,
             snap: true,
             elevation: 50,
-            title: Text('MOVIES', style: AppTextStyles.heading1White,),
+            title: Text('TV SHOWS', style: AppTextStyles.heading1White,),
             centerTitle: true,
             backgroundColor: AppColors.green_ming,
             flexibleSpace: FlexibleSpaceBar(
@@ -76,7 +75,7 @@ class _MoviesScreenState extends State<MoviesScreen> {
           SliverToBoxAdapter(
             child: FutureBuilder(
               future: Future.wait(
-                  [popularMovies, topRatedMovies, upcomingMovies]),
+                  [popularTvShows, topRatedTvShows, upcomingTvShows]),
               builder: (context, snapshot) {
                 if (snapshot.hasError)
                   return new Container(
@@ -88,7 +87,7 @@ class _MoviesScreenState extends State<MoviesScreen> {
                     child: Column(
                       children: [
                         for (int i = 0; i < snapshot.data.length; i++)
-                          MovieCategory(
+                          TvShowsCategory(
                             data: snapshot.data[i],
                             title: i == 0
                                 ? 'Popular Movies'

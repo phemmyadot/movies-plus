@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:moviesplus/models/config_model.dart';
-import 'package:moviesplus/screens/movies/movies_screen.dart';
-import 'package:moviesplus/screens/movies/search_screen.dart';
+import 'package:moviesplus/screens/tv_shows/search_screen.dart';
+import 'package:moviesplus/screens/tv_shows/tv_shows_screen.dart';
 import 'package:moviesplus/services/config_service.dart';
 import 'package:moviesplus/utils/app_icons.dart';
 import 'package:moviesplus/utils/essentials.dart';
 
-class MoviesEntryScreen extends StatefulWidget {
-  static const routeName = '/movies-entry';
+class TvShowsEntryScreen extends StatefulWidget {
+  static const routeName = '/tv-shows-entry';
   @override
-  _MoviesEntryScreenState createState() => _MoviesEntryScreenState();
+  _TvShowsEntryScreenState createState() => _TvShowsEntryScreenState();
 }
 
-class _MoviesEntryScreenState extends State<MoviesEntryScreen> {
+class _TvShowsEntryScreenState extends State<TvShowsEntryScreen> {
   int _screenNumber = 0;
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   ConfigurationResponse config;
@@ -26,18 +26,18 @@ class _MoviesEntryScreenState extends State<MoviesEntryScreen> {
   Widget build(BuildContext context) {
     List<NavObject> navItems = [
       NavObject(
-        screen: MoviesScreen(config),
+        screen: TvShowsScreen(config),
         navIcon: Icon(
           AppIcons.cinema,
           size: 20,
         ),
         title: Text(
-          'MOVIES',
+          'TV SHOWS',
           style: TextStyle(fontSize: 11, height: 2),
         ),
       ),
       NavObject(
-        screen: MoviesSearchScreen(config),
+        screen: TvShowsSearchScreen(config),
         navIcon: Icon(
           AppIcons.search,
           size: 20,

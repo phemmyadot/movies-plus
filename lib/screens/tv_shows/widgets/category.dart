@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:moviesplus/models/config_model.dart';
-import 'package:moviesplus/models/movie_model.dart';
+import 'package:moviesplus/models/tv_show_model.dart';
 import 'package:moviesplus/utils/app_icons.dart';
 import 'package:moviesplus/utils/essentials.dart';
 
-class MovieCategory extends StatefulWidget {
+class TvShowsCategory extends StatefulWidget {
   final title;
 
-  final MovieResponse data;
+  final TvShowResponse data;
 
   final categoryId;
 
   final ConfigurationResponse config;
 
-  MovieCategory({this.title, this.data, this.categoryId, this.config});
+  TvShowsCategory({this.title, this.data, this.categoryId, this.config});
 
   @override
-  _MovieCategoryState createState() => _MovieCategoryState();
+  _TvShowsCategoryState createState() => _TvShowsCategoryState();
 }
 
-class _MovieCategoryState extends State<MovieCategory> {
+class _TvShowsCategoryState extends State<TvShowsCategory> {
   @override
   @override
   Widget build(BuildContext context) {

@@ -36,7 +36,7 @@ Future<MovieResponse> fetchUpcomingMovies() async {
 
 Future<MovieResponse> searchMovies(query) async {
   final response = await http.get(
-      'https://api.themoviedb.org/3/search/movie?api_key=3c9086e443d538d7168dc3af18f638e2&language=en-US&query=$query&page=1&include_adult=false');
+      'https://api.themoviedb.org/3/search/movie?api_key=3c9086e443d538d7168dc3af18f638e2&language=en-US&query=$query&page=1');
   if (response.statusCode == 200) {
     return MovieResponse.fromJson(json.decode(response.body));
   } else {

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:moviesplus/screens/movies/entry_screen.dart';
+import 'package:moviesplus/screens/tv_shows/entry_screen.dart';
 import 'package:moviesplus/utils/essentials.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -48,15 +50,15 @@ class CustomDrawer extends StatelessWidget {
                         ListTile(
                           onTap: () {
                             Navigator.of(context)
-                                .pushReplacementNamed('/movies');
+                                .pushReplacementNamed(MoviesEntryScreen.routeName);
                           },
                           title: Text("MOVIES",
                               style: AppTextStyles.headline3White),
                         ),
                         ListTile(
                           onTap: () {
-                            // Navigator.of(context)
-                            //     .pushReplacementNamed('/tv-shows');
+                            Navigator.of(context)
+                                .pushReplacementNamed(TvShowsEntryScreen.routeName);
                           },
                           title: Text("TV SHOWS",
                               style: AppTextStyles.headline3White),
@@ -64,7 +66,7 @@ class CustomDrawer extends StatelessWidget {
                         ListTile(
                           onTap: () {
                             // Navigator.of(context)
-                            //     .pushReplacementNamed('/tv-shows');
+                            //     .pushReplacementNamed(TvShowsEntryScreen.routeName);
                           },
                           title: Text("MY LIST",
                               style: AppTextStyles.headline3White),
