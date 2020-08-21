@@ -14,3 +14,4 @@ Future<ConfigurationResponse> fetchConfigurations() async {
     throw Exception('Failed to load Movie');
   }
 }
+ 
