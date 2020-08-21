@@ -9,7 +9,6 @@ import 'package:moviesplus/widgets/custom_drawer.dart';
 import 'package:moviesplus/widgets/custom_input.dart';
 
 class TvShowsSearchScreen extends StatefulWidget {
-
   final config;
   TvShowsSearchScreen(this.config);
   @override
@@ -63,7 +62,8 @@ class _TvShowsSearchScreenState extends State<TvShowsSearchScreen> {
                     } else if (!snapshot.hasData ||
                         snapshot.data.results.length == 0) {
                       return new Center(
-                        child: Text("No search result"),
+                        child: Text("No search result",
+                            style: AppTextStyles.bodyText),
                       );
                     } else if (snapshot.hasData) {
                       return GridView.count(

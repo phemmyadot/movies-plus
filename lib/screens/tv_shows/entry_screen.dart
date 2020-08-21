@@ -5,6 +5,7 @@ import 'package:moviesplus/screens/tv_shows/tv_shows_screen.dart';
 import 'package:moviesplus/services/config_service.dart';
 import 'package:moviesplus/utils/app_icons.dart';
 import 'package:moviesplus/utils/essentials.dart';
+import 'package:moviesplus/widgets/custom_drawer.dart';
 
 class TvShowsEntryScreen extends StatefulWidget {
   static const routeName = '/tv-shows-entry';
@@ -26,7 +27,7 @@ class _TvShowsEntryScreenState extends State<TvShowsEntryScreen> {
   Widget build(BuildContext context) {
     List<NavObject> navItems = [
       NavObject(
-        screen: TvShowsScreen(config),
+        screen: TvShowsScreen(config, _scaffoldKey),
         navIcon: Icon(
           AppIcons.cinema,
           size: 20,
@@ -94,6 +95,7 @@ class _TvShowsEntryScreenState extends State<TvShowsEntryScreen> {
           ),
         ],
       ),
+      drawer: CustomDrawer(),
     );
   }
 }

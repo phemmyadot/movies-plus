@@ -8,10 +8,11 @@ import 'package:moviesplus/utils/essentials.dart';
 import 'package:moviesplus/widgets/custom_drawer.dart';
 
 class TvShowsScreen extends StatefulWidget {
-
   final config;
 
-  TvShowsScreen(this.config);
+  final scaffoldKey;
+
+  TvShowsScreen(this.config, this.scaffoldKey);
   @override
   _TvShowsScreenState createState() => _TvShowsScreenState();
 }
@@ -21,7 +22,6 @@ class _TvShowsScreenState extends State<TvShowsScreen> {
   Future<TvShowResponse> popularTvShows;
   Future<TvShowResponse> topRatedTvShows;
   Future<TvShowResponse> upcomingTvShows;
-  final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   void initState() {
     popularTvShows = fetchPopularTvShows();
@@ -34,21 +34,23 @@ class _TvShowsScreenState extends State<TvShowsScreen> {
   Widget build(BuildContext context) {
     final double statusBarHeight = MediaQuery.of(context).padding.top;
     return Scaffold(
-      key: _scaffoldKey,
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
             leading: IconButton(
                 icon: Icon(AppIcons.menu),
                 onPressed: () {
-                  _scaffoldKey.currentState.openDrawer();
+                  widget.scaffoldKey.currentState.openDrawer();
                 }),
             expandedHeight: 220.0,
             floating: true,
             pinned: true,
             snap: true,
             elevation: 50,
-            title: Text('TV SHOWS', style: AppTextStyles.heading1White,),
+            title: Text(
+              'TV SHOWS',
+              style: AppTextStyles.heading1White,
+            ),
             centerTitle: true,
             backgroundColor: AppColors.green_ming,
             flexibleSpace: FlexibleSpaceBar(
@@ -108,7 +110,6 @@ class _TvShowsScreenState extends State<TvShowsScreen> {
           ),
         ],
       ),
-      drawer: CustomDrawer(),
     );
   }
 }

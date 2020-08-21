@@ -43,3 +43,23 @@ Future<MovieResponse> searchMovies(query) async {
     throw Exception('Failed to load Movie');
   }
 }
+
+Future<MovieDetail> fetchMovie(id) async {
+  final response = await http.get(
+      'https://api.themoviedb.org/3/movie/$id?api_key=3c9086e443d538d7168dc3af18f638e2&language=en-US');
+  if (response.statusCode == 200) {
+    return MovieDetail.fromJson(json.decode(response.body));
+  } else {
+    throw Exception('Failed to load Movie');
+  }
+}
+
+Future<MovieVideoResponse> fetchMovieVideo(id) async {
+  final response = await http.get(
+      'https://api.themoviedb.org/3/movie/$id/videos?api_key=3c9086e443d538d7168dc3af18f638e2&language=en-US');
+  if (response.statusCode == 200) {
+    return MovieVideoResponse.fromJson(json.decode(response.body));
+  } else {
+    throw Exception('Failed to load Movie');
+  }
+}

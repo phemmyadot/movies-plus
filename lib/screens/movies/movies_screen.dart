@@ -5,14 +5,15 @@ import 'package:moviesplus/screens/movies/widgets/category.dart';
 import 'package:moviesplus/services/movies_service.dart';
 import 'package:moviesplus/utils/app_icons.dart';
 import 'package:moviesplus/utils/essentials.dart';
-import 'package:moviesplus/widgets/custom_drawer.dart';
 
 class MoviesScreen extends StatefulWidget {
   static const routeName = '/movies';
 
   final config;
 
-  MoviesScreen(this.config);
+  final scaffoldKey;
+
+  MoviesScreen(this.config, this.scaffoldKey);
   @override
   _MoviesScreenState createState() => _MoviesScreenState();
 }
@@ -22,7 +23,6 @@ class _MoviesScreenState extends State<MoviesScreen> {
   Future<MovieResponse> popularMovies;
   Future<MovieResponse> topRatedMovies;
   Future<MovieResponse> upcomingMovies;
-  final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   void initState() {
     popularMovies = fetchPopularMovies();
@@ -35,14 +35,13 @@ class _MoviesScreenState extends State<MoviesScreen> {
   Widget build(BuildContext context) {
     final double statusBarHeight = MediaQuery.of(context).padding.top;
     return Scaffold(
-      key: _scaffoldKey,
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
             leading: IconButton(
                 icon: Icon(AppIcons.menu),
                 onPressed: () {
-                  _scaffoldKey.currentState.openDrawer();
+                  widget.scaffoldKey.currentState.openDrawer();
                 }),
             expandedHeight: 220.0,
             floating: true,
@@ -109,7 +108,7 @@ class _MoviesScreenState extends State<MoviesScreen> {
           ),
         ],
       ),
-      drawer: CustomDrawer(),
+      
     );
   }
 }

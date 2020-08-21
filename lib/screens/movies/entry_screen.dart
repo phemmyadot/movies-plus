@@ -5,6 +5,7 @@ import 'package:moviesplus/screens/movies/search_screen.dart';
 import 'package:moviesplus/services/config_service.dart';
 import 'package:moviesplus/utils/app_icons.dart';
 import 'package:moviesplus/utils/essentials.dart';
+import 'package:moviesplus/widgets/custom_drawer.dart';
 
 class MoviesEntryScreen extends StatefulWidget {
   static const routeName = '/movies-entry';
@@ -26,7 +27,7 @@ class _MoviesEntryScreenState extends State<MoviesEntryScreen> {
   Widget build(BuildContext context) {
     List<NavObject> navItems = [
       NavObject(
-        screen: MoviesScreen(config),
+        screen: MoviesScreen(config, _scaffoldKey),
         navIcon: Icon(
           AppIcons.cinema,
           size: 20,
@@ -49,6 +50,7 @@ class _MoviesEntryScreenState extends State<MoviesEntryScreen> {
       ),
     ];
     return Scaffold(
+      drawer: CustomDrawer(),
       key: _scaffoldKey,
       body: Stack(
         children: [

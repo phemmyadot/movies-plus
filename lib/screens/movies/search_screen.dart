@@ -64,7 +64,10 @@ class _MoviesSearchScreenState extends State<MoviesSearchScreen> {
                     } else if (!snapshot.hasData ||
                         snapshot.data.results.length == 0) {
                       return new Center(
-                        child: Text("No search result"),
+                        child: Text(
+                          "No search result",
+                          style: AppTextStyles.bodyText,
+                        ),
                       );
                     } else if (snapshot.hasData) {
                       return GridView.count(

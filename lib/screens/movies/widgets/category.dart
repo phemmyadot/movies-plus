@@ -4,6 +4,8 @@ import 'package:moviesplus/models/movie_model.dart';
 import 'package:moviesplus/utils/app_icons.dart';
 import 'package:moviesplus/utils/essentials.dart';
 
+import 'details.dart';
+
 class MovieCategory extends StatefulWidget {
   final title;
 
@@ -43,8 +45,7 @@ class _MovieCategoryState extends State<MovieCategory> {
                     children: [
                       for (int x = 0; x < widget.data.results.length; x++)
                         GestureDetector(
-                          onTap: () => print(
-                              '${widget.config.baseUrl}w300${widget.data.results[x].posterPath}'),
+                          onTap: () => Navigator.of(context).pushNamed(MovieDetails.routeName, arguments: ScreenArguments(widget.data.results[x].id, widget.config)),
                           child: Card(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
