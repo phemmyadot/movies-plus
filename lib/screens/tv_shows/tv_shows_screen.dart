@@ -88,7 +88,7 @@ class _TvShowsScreenState extends State<TvShowsScreen> {
                 else if (snapshot.hasData) {
                   return Container(
                     color: AppColors.offWhite,
-                    margin: EdgeInsets.only(bottom: 100.0),
+                    padding: EdgeInsets.only(bottom: 100.0),
                     child: Column(
                       children: [
                         for (int i = 0; i < snapshot.data.length; i++)
