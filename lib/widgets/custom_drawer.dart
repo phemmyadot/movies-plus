@@ -63,14 +63,14 @@ class CustomDrawer extends StatelessWidget {
                           title: Text("TV SHOWS",
                               style: AppTextStyles.headline3White),
                         ),
-                        ListTile(
-                          onTap: () {
-                            // Navigator.of(context)
-                            //     .pushReplacementNamed(TvShowsEntryScreen.routeName);
-                          },
-                          title: Text("MY LIST",
-                              style: AppTextStyles.headline3White),
-                        ),
+                        // ListTile(
+                        //   onTap: () {
+                        //     // Navigator.of(context)
+                        //     //     .pushReplacementNamed(TvShowsEntryScreen.routeName);
+                        //   },
+                        //   title: Text("MY LIST",
+                        //       style: AppTextStyles.headline3White),
+                        // ),
                       ],
                     ),
                   ),

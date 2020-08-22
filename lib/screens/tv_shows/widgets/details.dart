@@ -3,23 +3,24 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
-import 'package:moviesplus/models/movie_model.dart';
-import 'package:moviesplus/services/movies_service.dart';
+import 'package:moviesplus/models/tv_show_model.dart';
+import 'package:moviesplus/services/tv_shows_service.dart';
 import 'package:moviesplus/utils/essentials.dart';
 import 'package:moviesplus/widgets/custom_drawer.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:moviesplus/widgets/custom_expansion_tile.dart' as custom;
 
-class MovieDetails extends StatefulWidget {
-  static const routeName = '/movie-detail';
+class TvShowDetails extends StatefulWidget {
+  static const routeName = '/tv-detail';
 
-  MovieDetails();
+  TvShowDetails();
   @override
-  _MovieDetailsState createState() => _MovieDetailsState();
+  _TvShowDetailsState createState() => _TvShowDetailsState();
 }
 
-class _MovieDetailsState extends State<MovieDetails> {
+class _TvShowDetailsState extends State<TvShowDetails> {
   ScrollController scrollController;
-  Future<MovieDetail> currentMovie;
+  Future<TvShowDetail> currentShow;
   int id;
   var config;
 
@@ -28,7 +29,7 @@ class _MovieDetailsState extends State<MovieDetails> {
       setState(() {
         ScreenArguments args = ModalRoute.of(context).settings.arguments;
         id = args.id;
-        currentMovie = fetchMovie(args.id);
+        currentShow = fetchTvShow(args.id);
         config = args.config;
       });
     });
@@ -45,8 +46,8 @@ class _MovieDetailsState extends State<MovieDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: FutureBuilder(
-        future: currentMovie,
-        builder: (context, AsyncSnapshot<MovieDetail> snapshot) {
+        future: currentShow,
+        builder: (context, AsyncSnapshot<TvShowDetail> snapshot) {
           if (snapshot.hasError) {
             return Container(
               child: Text(
@@ -113,7 +114,7 @@ class _MovieDetailsState extends State<MovieDetails> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'Release Date:',
+                                    'First Air Date:',
                                     style: AppTextStyles.bodyText,
                                   ),
                                   SizedBox(
@@ -124,6 +125,29 @@ class _MovieDetailsState extends State<MovieDetails> {
                                       DateFormat('MMMM dd, yyyy').format(
                                           DateTime.parse(
                                               snapshot.data.releaseDate)),
+                                      style: AppTextStyles.bodyText,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 10.0,
+                              ),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Last Air Date:',
+                                    style: AppTextStyles.bodyText,
+                                  ),
+                                  SizedBox(
+                                    width: 10.0,
+                                  ),
+                                  Flexible(
+                                    child: Text(
+                                      DateFormat('MMMM dd, yyyy').format(
+                                          DateTime.parse(
+                                              snapshot.data.lastAirDate)),
                                       style: AppTextStyles.bodyText,
                                     ),
                                   ),
@@ -174,6 +198,52 @@ class _MovieDetailsState extends State<MovieDetails> {
                               SizedBox(
                                 height: 10.0,
                               ),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Last Episode:',
+                                    style: AppTextStyles.bodyText,
+                                  ),
+                                  SizedBox(
+                                    width: 10.0,
+                                  ),
+                                  Flexible(
+                                    child: Text(
+                                      snapshot.data.lastEpisode == null
+                                          ? 'N/A'
+                                          : "Episode ${snapshot.data.lastEpisode.number} - ${snapshot.data.lastEpisode.name} - ${DateFormat('MMMM dd, yyyy').format(DateTime.parse(snapshot.data.lastEpisode.date))}",
+                                      style: AppTextStyles.bodyText,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 10.0,
+                              ),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Next Episode:',
+                                    style: AppTextStyles.bodyText,
+                                  ),
+                                  SizedBox(
+                                    width: 10.0,
+                                  ),
+                                  Flexible(
+                                    child: Text(
+                                      snapshot.data.nextEpisode == null
+                                          ? 'N/A'
+                                          : "Episode ${snapshot.data.nextEpisode.number} - ${snapshot.data.nextEpisode.name} - ${DateFormat('MMMM dd, yyyy').format(DateTime.parse(snapshot.data.nextEpisode.date))}",
+                                      style: AppTextStyles.bodyText,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 10.0,
+                              ),
                               snapshot.data.link == ""
                                   ? Container()
                                   : Row(
@@ -206,6 +276,10 @@ class _MovieDetailsState extends State<MovieDetails> {
                                         ),
                                       ],
                                     ),
+                              SizedBox(
+                                height: 20.0,
+                              ),
+                              _buildSeason(snapshot.data.seasons),
                             ],
                           ),
                         ),
@@ -257,8 +331,6 @@ class _MovieDetailsState extends State<MovieDetails> {
                         ),
                       ],
                     ),
-                    // TasksMenu(),
-                    // AddNewButton('TASK')
                   ],
                 ),
               ),
@@ -270,6 +342,104 @@ class _MovieDetailsState extends State<MovieDetails> {
         },
       ),
       drawer: CustomDrawer(),
+    );
+  }
+
+  Widget _buildSeason(List<Season> episodes) {
+    return Theme(
+      data: ThemeData().copyWith(cardColor: Colors.transparent),
+      child: Container(
+        child: Column(
+          children: <Widget>[
+            ...episodes
+                .where((episode) => episode.seasonNumber != 0)
+                .map(
+                  (Season season) => Container(
+                    margin: EdgeInsets.symmetric(vertical: 10.0),
+                    child: custom.ExpansionTile(
+                      iconColor: AppColors.green_ming,
+                      headerBackgroundColorStart: AppColors.green_honeydraw,
+                      headerBackgroundColorEnd: AppColors.green_nyanza,
+                      shadowColor: AppColors.green_sheen,
+                      title: Container(
+                        margin: EdgeInsets.only(
+                            left: MediaQuery.of(context).size.width * 0.1),
+                        child: Text(
+                          season.name,
+                          textAlign: TextAlign.center,
+                          style: AppTextStyles.headline2White
+                              .copyWith(color: AppColors.green_ming),
+                        ),
+                      ),
+                      initiallyExpanded: false,
+                      children: <Widget>[
+                        Container(
+                          padding: EdgeInsets.only(bottom: 20),
+                          width: double.infinity,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              SizedBox(
+                                height: 15.0,
+                              ),
+                              Text(
+                                season.overview,
+                                style: AppTextStyles.bodyText,
+                              ),
+                              SizedBox(
+                                height: 10.0,
+                              ),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Realeased Year:',
+                                    style: AppTextStyles.bodyText,
+                                  ),
+                                  SizedBox(
+                                    width: 10.0,
+                                  ),
+                                  Flexible(
+                                    child: Text(
+                                      DateFormat('yyyy')
+                                          .format(DateTime.parse(season.date)),
+                                      style: AppTextStyles.bodyText,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 10.0,
+                              ),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Number of Episodes:',
+                                    style: AppTextStyles.bodyText,
+                                  ),
+                                  SizedBox(
+                                    width: 10.0,
+                                  ),
+                                  Flexible(
+                                    child: Text(
+                                      season.episodeCount.toString(),
+                                      style: AppTextStyles.bodyText,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+                .toList(),
+          ],
+        ),
+      ),
     );
   }
 }

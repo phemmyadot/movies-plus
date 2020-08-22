@@ -10,7 +10,7 @@ Future<TvShowResponse> fetchPopularTvShows() async {
   if (response.statusCode == 200) {
     return TvShowResponse.fromJson(json.decode(response.body));
   } else {
-    throw Exception('Failed to load Movie');
+    throw Exception('Failed to load Tv Show');
   }
 }
 
@@ -20,7 +20,7 @@ Future<TvShowResponse> fetchTopRatedTvShows() async {
   if (response.statusCode == 200) {
     return TvShowResponse.fromJson(json.decode(response.body));
   } else {
-    throw Exception('Failed to load Movie');
+    throw Exception('Failed to load Tv Show');
   }
 }
 
@@ -30,7 +30,7 @@ Future<TvShowResponse> fetchUpcomingTvShows() async {
   if (response.statusCode == 200) {
     return TvShowResponse.fromJson(json.decode(response.body));
   } else {
-    throw Exception('Failed to load Movie');
+    throw Exception('Failed to load Tv Show');
   }
 }
 
@@ -40,6 +40,17 @@ Future<TvShowResponse> searchTvShows(query) async {
   if (response.statusCode == 200) {
     return TvShowResponse.fromJson(json.decode(response.body));
   } else {
-    throw Exception('Failed to load Movie');
+    throw Exception('Failed to load Tv Show');
+  }
+}
+
+
+Future<TvShowDetail> fetchTvShow(id) async {
+  final response = await http.get(
+      'https://api.themoviedb.org/3/tv/$id?api_key=3c9086e443d538d7168dc3af18f638e2&language=en-US');
+  if (response.statusCode == 200) {
+    return TvShowDetail.fromJson(json.decode(response.body));
+  } else {
+    throw Exception('Failed to load Tv Show');
   }
 }

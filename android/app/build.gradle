@@ -41,7 +41,8 @@ android {
         applicationId "com.example.moviesplus"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode System.getenv('APPCENTER_BUILD_ID').toInteger()
+        // versionCode System.getenv('APPCENTER_BUILD_ID').toInteger()
+        versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
 

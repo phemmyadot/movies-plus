@@ -24,8 +24,16 @@ class Movie {
   final String title;
   final String releaseDate;
   final String posterPath;
+  final String backdropPath;
 
-  Movie({this.userId, this.id, this.title, this.releaseDate, this.posterPath});
+  Movie({
+    this.userId,
+    this.id,
+    this.title,
+    this.releaseDate,
+    this.posterPath,
+    this.backdropPath,
+  });
 
   factory Movie.fromJson(Map<String, dynamic> json) {
     return Movie(
@@ -34,6 +42,7 @@ class Movie {
       title: json['title'],
       releaseDate: json['release_date'],
       posterPath: json['poster_path'],
+      backdropPath: json['backdrop_path'],
     );
   }
 }
@@ -43,51 +52,54 @@ class MovieDetail {
   final String title;
   final String releaseDate;
   final String posterPath;
+  final String backdropPath;
+  final String overview;
+  final String status;
+  final String link;
+  final double rating;
+  final List<Genre> genres;
 
-  MovieDetail(
-      {this.id, this.title, this.releaseDate, this.posterPath});
+  MovieDetail({
+    this.id,
+    this.title,
+    this.releaseDate,
+    this.posterPath,
+    this.backdropPath,
+    this.overview,
+    this.genres,
+    this.link,
+    this.status,
+    this.rating,
+  });
 
   factory MovieDetail.fromJson(Map<String, dynamic> json) {
+    Iterable list = json['genres'];
+    List<Genre> genres = list.map((i) => Genre.fromJson(i)).toList();
     return MovieDetail(
       id: json['id'],
       title: json['title'],
+      genres: genres,
+      overview: json['overview'],
+      status: json['status'],
+      rating: json['vote_average'],
       releaseDate: json['release_date'],
+      link: json['homepage'],
       posterPath: json['poster_path'],
+      backdropPath: json['backdrop_path'],
     );
   }
 }
 
+class Genre {
+  final String name;
 
-class MovieVideoResponse {
-  final int id;
-  final List<MovieVideo> results;
+  Genre({
+    this.name,
+  });
 
-  MovieVideoResponse({this.id, this.results});
-
-  factory MovieVideoResponse.fromJson(Map<dynamic, dynamic> json) {
-    Iterable list = json['results'];
-    List<MovieVideo> videos = list.map((i) => MovieVideo.fromJson(i)).toList();
-    return MovieVideoResponse(
-      id: json['id'],
-      results: videos,
-    );
-  }
-}
-class MovieVideo {
-  final String id;
-  final String site;
-  final String type;
-  final String key;
-
-  MovieVideo(
-      {this.id, this.site, this.type, this.key});
-
-  factory MovieVideo.fromJson(Map<String, dynamic> json) {
-    return MovieVideo(
-      id: json['id'],
-      site: json['site'],
-      type: json['type'],
-      key: json['key'],
+  factory Genre.fromJson(Map<String, dynamic> json) {
+    return Genre(
+      name: json['name'],
     );
   }
 }

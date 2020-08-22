@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:moviesplus/models/movie_model.dart';
+import 'package:moviesplus/screens/movies/widgets/details.dart';
 import 'package:moviesplus/services/movies_service.dart';
 import 'package:moviesplus/utils/essentials.dart';
 import 'package:moviesplus/widgets/custom_drawer.dart';
@@ -78,7 +79,7 @@ class _MoviesSearchScreenState extends State<MoviesSearchScreen> {
                             Container(
                               margin: const EdgeInsets.only(bottom: 9.0),
                               child: GestureDetector(
-                                onTap: () => null,
+                                onTap: () => Navigator.of(context).pushNamed(MovieDetails.routeName, arguments: ScreenArguments(snapshot.data.results[i].id, widget.config)),
                                 child: Card(
                                   child: Column(
                                     crossAxisAlignment:

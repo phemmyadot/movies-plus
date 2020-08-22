@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:moviesplus/models/config_model.dart';
 import 'package:moviesplus/models/tv_show_model.dart';
+import 'package:moviesplus/screens/tv_shows/widgets/details.dart';
 import 'package:moviesplus/utils/app_icons.dart';
 import 'package:moviesplus/utils/essentials.dart';
 
@@ -43,8 +44,7 @@ class _TvShowsCategoryState extends State<TvShowsCategory> {
                     children: [
                       for (int x = 0; x < widget.data.results.length; x++)
                         GestureDetector(
-                          onTap: () => print(
-                              '${widget.config.baseUrl}w300${widget.data.results[x].posterPath}'),
+                          onTap: () =>Navigator.of(context).pushNamed(TvShowDetails.routeName, arguments: ScreenArguments(widget.data.results[x].id, widget.config)),
                           child: Card(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
