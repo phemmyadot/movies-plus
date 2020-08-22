@@ -48,7 +48,10 @@ class _MoviesScreenState extends State<MoviesScreen> {
             pinned: true,
             snap: true,
             elevation: 50,
-            title: Text('MOVIES', style: AppTextStyles.heading1White,),
+            title: Text(
+              'MOVIES',
+              style: AppTextStyles.heading1White,
+            ),
             centerTitle: true,
             backgroundColor: AppColors.green_ming,
             flexibleSpace: FlexibleSpaceBar(
@@ -68,14 +71,15 @@ class _MoviesScreenState extends State<MoviesScreen> {
                 ),
                 height:
                     statusBarHeight + MediaQuery.of(context).size.height * 0.1,
-                child: Container(),
+                // child: Center(
+                //     child: Image.asset('assets/images/moviespluslogo.png')),
               ),
             ),
           ),
           SliverToBoxAdapter(
             child: FutureBuilder(
-              future: Future.wait(
-                  [popularMovies, topRatedMovies, upcomingMovies]),
+              future:
+                  Future.wait([popularMovies, topRatedMovies, upcomingMovies]),
               builder: (context, snapshot) {
                 if (snapshot.hasError)
                   return new Container(
@@ -101,14 +105,19 @@ class _MoviesScreenState extends State<MoviesScreen> {
                   );
                 }
                 return Container(
-                    height: MediaQuery.of(context).size.height * 0.6,
-                    child: Center(child: CircularProgressIndicator()));
+                  height: MediaQuery.of(context).size.height * 0.6,
+                  child: Center(
+                    child: CircularProgressIndicator(
+                      valueColor: new AlwaysStoppedAnimation<Color>(
+                          AppColors.green_ming),
+                    ),
+                  ),
+                );
               },
             ),
           ),
         ],
       ),
-      
     );
   }
 }

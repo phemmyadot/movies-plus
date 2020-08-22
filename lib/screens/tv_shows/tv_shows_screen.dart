@@ -104,7 +104,10 @@ class _TvShowsScreenState extends State<TvShowsScreen> {
                 }
                 return Container(
                     height: MediaQuery.of(context).size.height * 0.6,
-                    child: Center(child: CircularProgressIndicator()));
+                    child: Center(child: CircularProgressIndicator(
+                      valueColor: new AlwaysStoppedAnimation<Color>(
+                          AppColors.green_ming),
+                    ),));
               },
             ),
           ),

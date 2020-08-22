@@ -337,8 +337,13 @@ class _TvShowDetailsState extends State<TvShowDetails> {
             );
           }
           return Container(
-              height: MediaQuery.of(context).size.height * 0.6,
-              child: Center(child: CircularProgressIndicator()));
+              height: MediaQuery.of(context).size.height,
+              child: Center(
+                child: CircularProgressIndicator(
+                  valueColor:
+                      new AlwaysStoppedAnimation<Color>(AppColors.green_ming),
+                ),
+              ));
         },
       ),
       drawer: CustomDrawer(),

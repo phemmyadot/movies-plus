@@ -61,7 +61,10 @@ class _MoviesSearchScreenState extends State<MoviesSearchScreen> {
                     } else if (snapshot.data == 1) {
                       return Container(
                           height: MediaQuery.of(context).size.height * 0.6,
-                          child: Center(child: CircularProgressIndicator()));
+                          child: Center(child: CircularProgressIndicator(
+                      valueColor: new AlwaysStoppedAnimation<Color>(
+                          AppColors.green_ming),
+                    ),));
                     } else if (!snapshot.hasData ||
                         snapshot.data.results.length == 0) {
                       return new Center(
@@ -142,7 +145,10 @@ class _MoviesSearchScreenState extends State<MoviesSearchScreen> {
                     }
                     return Container(
                         height: MediaQuery.of(context).size.height * 0.6,
-                        child: Center(child: CircularProgressIndicator()));
+                        child: Center(child: CircularProgressIndicator(
+                      valueColor: new AlwaysStoppedAnimation<Color>(
+                          AppColors.green_ming),
+                    ),));
                   },
                 ),
               ),
