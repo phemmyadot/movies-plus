@@ -81,10 +81,13 @@ class _TvShowsScreenState extends State<TvShowsScreen> {
               builder: (context, snapshot) {
                 if (snapshot.hasError)
                   return new Container(
+                    height: double.infinity,
+                    color: AppColors.offWhite,
                     child: Text("${snapshot.error}"),
                   );
                 else if (snapshot.hasData) {
                   return Container(
+                    color: AppColors.offWhite,
                     margin: EdgeInsets.only(bottom: 100.0),
                     child: Column(
                       children: [

@@ -76,6 +76,7 @@ class _TvShowsEntryScreenState extends State<TvShowsEntryScreen> {
                 ),
                 child: BottomNavigationBar(
                   // elevation: 2,
+                  backgroundColor: AppColors.offWhite,
                   selectedItemColor: AppColors.green_ming,
                   unselectedItemColor: AppColors.green_sheen,
                   type: BottomNavigationBarType.fixed,

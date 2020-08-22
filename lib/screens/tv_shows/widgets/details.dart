@@ -57,6 +57,7 @@ class _TvShowDetailsState extends State<TvShowDetails> {
           } else if (snapshot.hasData) {
             return SingleChildScrollView(
               child: Container(
+                color: AppColors.offWhite,
                 child: Stack(
                   children: <Widget>[
                     Container(
@@ -337,13 +338,14 @@ class _TvShowDetailsState extends State<TvShowDetails> {
             );
           }
           return Container(
-              height: MediaQuery.of(context).size.height,
-              child: Center(
-                child: CircularProgressIndicator(
-                  valueColor:
-                      new AlwaysStoppedAnimation<Color>(AppColors.green_ming),
-                ),
-              ));
+            height: MediaQuery.of(context).size.height,
+            child: Center(
+              child: CircularProgressIndicator(
+                valueColor:
+                    new AlwaysStoppedAnimation<Color>(AppColors.green_ming),
+              ),
+            ),
+          );
         },
       ),
       drawer: CustomDrawer(),

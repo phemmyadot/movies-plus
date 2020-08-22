@@ -43,7 +43,8 @@ class _TvShowsSearchScreenState extends State<TvShowsSearchScreen> {
         child: Stack(
           children: <Widget>[
             Container(
-              margin: EdgeInsets.only(
+              color: AppColors.offWhite,
+              padding: EdgeInsets.only(
                 top: MediaQuery.of(context).size.height * 0.22,
               ),
               width: double.infinity,
@@ -57,15 +58,17 @@ class _TvShowsSearchScreenState extends State<TvShowsSearchScreen> {
                       return new Container();
                     } else if (snapshot.data == 1) {
                       return Container(
-                          height: MediaQuery.of(context).size.height * 0.6,
-                          child: Center(child: CircularProgressIndicator(
-                      valueColor: new AlwaysStoppedAnimation<Color>(
-                          AppColors.green_ming),
-                    ),));
+                          height: MediaQuery.of(context).size.height * 0.7,
+                          child: Center(
+                            child: CircularProgressIndicator(
+                              valueColor: new AlwaysStoppedAnimation<Color>(
+                                  AppColors.green_ming),
+                            ),
+                          ));
                     } else if (!snapshot.hasData ||
                         snapshot.data.results.length == 0) {
                       return new Center(
-                        child: Text("No search result",
+                        child: Text("Cannot find a TV Show with that title",
                             style: AppTextStyles.bodyText),
                       );
                     } else if (snapshot.hasData) {
@@ -140,10 +143,12 @@ class _TvShowsSearchScreenState extends State<TvShowsSearchScreen> {
                     }
                     return Container(
                         height: MediaQuery.of(context).size.height * 0.6,
-                        child: Center(child: CircularProgressIndicator(
-                      valueColor: new AlwaysStoppedAnimation<Color>(
-                          AppColors.green_ming),
-                    ),));
+                        child: Center(
+                          child: CircularProgressIndicator(
+                            valueColor: new AlwaysStoppedAnimation<Color>(
+                                AppColors.green_ming),
+                          ),
+                        ));
                   },
                 ),
               ),

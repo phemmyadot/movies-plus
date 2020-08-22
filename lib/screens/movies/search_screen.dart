@@ -43,6 +43,7 @@ class _MoviesSearchScreenState extends State<MoviesSearchScreen> {
     final double itemWidth = size.width / 2;
     return Scaffold(
       body: Container(
+        color: AppColors.offWhite,
         child: Stack(
           children: <Widget>[
             Container(
@@ -60,16 +61,18 @@ class _MoviesSearchScreenState extends State<MoviesSearchScreen> {
                       return new Container();
                     } else if (snapshot.data == 1) {
                       return Container(
-                          height: MediaQuery.of(context).size.height * 0.6,
-                          child: Center(child: CircularProgressIndicator(
-                      valueColor: new AlwaysStoppedAnimation<Color>(
-                          AppColors.green_ming),
-                    ),));
+                          height: MediaQuery.of(context).size.height * 0.7,
+                          child: Center(
+                            child: CircularProgressIndicator(
+                              valueColor: new AlwaysStoppedAnimation<Color>(
+                                  AppColors.green_ming),
+                            ),
+                          ));
                     } else if (!snapshot.hasData ||
                         snapshot.data.results.length == 0) {
                       return new Center(
                         child: Text(
-                          "No search result",
+                          "Cannot find a Movie with that title",
                           style: AppTextStyles.bodyText,
                         ),
                       );
@@ -82,7 +85,11 @@ class _MoviesSearchScreenState extends State<MoviesSearchScreen> {
                             Container(
                               margin: const EdgeInsets.only(bottom: 9.0),
                               child: GestureDetector(
-                                onTap: () => Navigator.of(context).pushNamed(MovieDetails.routeName, arguments: ScreenArguments(snapshot.data.results[i].id, widget.config)),
+                                onTap: () => Navigator.of(context).pushNamed(
+                                    MovieDetails.routeName,
+                                    arguments: ScreenArguments(
+                                        snapshot.data.results[i].id,
+                                        widget.config)),
                                 child: Card(
                                   child: Column(
                                     crossAxisAlignment:
@@ -145,10 +152,12 @@ class _MoviesSearchScreenState extends State<MoviesSearchScreen> {
                     }
                     return Container(
                         height: MediaQuery.of(context).size.height * 0.6,
-                        child: Center(child: CircularProgressIndicator(
-                      valueColor: new AlwaysStoppedAnimation<Color>(
-                          AppColors.green_ming),
-                    ),));
+                        child: Center(
+                          child: CircularProgressIndicator(
+                            valueColor: new AlwaysStoppedAnimation<Color>(
+                                AppColors.green_ming),
+                          ),
+                        ));
                   },
                 ),
               ),

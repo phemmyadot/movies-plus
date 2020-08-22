@@ -56,6 +56,7 @@ class _MovieDetailsState extends State<MovieDetails> {
           } else if (snapshot.hasData) {
             return SingleChildScrollView(
               child: Container(
+                color: AppColors.offWhite,
                 child: Stack(
                   children: <Widget>[
                     Container(
@@ -248,28 +249,30 @@ class _MovieDetailsState extends State<MovieDetails> {
                           child: Card(
                             elevation: 10,
                             child: Padding(
-                                padding: const EdgeInsets.all(0.0),
-                                child: Image.network(
-                                  '${config.baseUrl}w300${snapshot.data.posterPath}',
-                                  fit: BoxFit.cover,
-                                )),
+                              padding: const EdgeInsets.all(0.0),
+                              child: Image.network(
+                                '${config.baseUrl}w300${snapshot.data.posterPath}',
+                                fit: BoxFit.cover,
+                              ),
+                            ),
                           ),
                         ),
                       ],
                     ),
-                    // TasksMenu(),
-                    // AddNewButton('TASK')
                   ],
                 ),
               ),
             );
           }
           return Container(
-              height: MediaQuery.of(context).size.height,
-              child: Center(child: CircularProgressIndicator(
-                      valueColor: new AlwaysStoppedAnimation<Color>(
-                          AppColors.green_ming),
-                    ),));
+            height: MediaQuery.of(context).size.height,
+            child: Center(
+              child: CircularProgressIndicator(
+                valueColor:
+                    new AlwaysStoppedAnimation<Color>(AppColors.green_ming),
+              ),
+            ),
+          );
         },
       ),
       drawer: CustomDrawer(),

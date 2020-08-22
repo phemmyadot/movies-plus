@@ -76,6 +76,7 @@ class _MoviesEntryScreenState extends State<MoviesEntryScreen> {
                   topLeft: Radius.circular(20),
                 ),
                 child: BottomNavigationBar(
+                  backgroundColor: AppColors.offWhite,
                   // elevation: 2,
                   selectedItemColor: AppColors.green_ming,
                   unselectedItemColor: AppColors.green_sheen,

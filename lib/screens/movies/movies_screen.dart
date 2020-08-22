@@ -71,8 +71,6 @@ class _MoviesScreenState extends State<MoviesScreen> {
                 ),
                 height:
                     statusBarHeight + MediaQuery.of(context).size.height * 0.1,
-                // child: Center(
-                //     child: Image.asset('assets/images/moviespluslogo.png')),
               ),
             ),
           ),
@@ -83,11 +81,14 @@ class _MoviesScreenState extends State<MoviesScreen> {
               builder: (context, snapshot) {
                 if (snapshot.hasError)
                   return new Container(
+                    height: double.infinity,
+                    color: AppColors.offWhite,
                     child: Text("${snapshot.error}"),
                   );
                 else if (snapshot.hasData) {
                   return Container(
-                    margin: EdgeInsets.only(bottom: 100.0),
+                    color: AppColors.offWhite,
+                    padding: EdgeInsets.only(bottom: 100.0),
                     child: Column(
                       children: [
                         for (int i = 0; i < snapshot.data.length; i++)
